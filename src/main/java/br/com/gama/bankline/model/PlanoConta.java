@@ -20,6 +20,14 @@ public class PlanoConta {
 	
 	@Column(nullable = false)
 	private TipoPlanoConta tipoPlanoConta;
+	
+	public PlanoConta() {
+	}
+	
+	public PlanoConta(String descricao, TipoPlanoConta tipoPlanoConta) {
+		this.descricao = descricao;
+		this.tipoPlanoConta = tipoPlanoConta;
+	}
 
 	public Long getId() {
 		return id;
