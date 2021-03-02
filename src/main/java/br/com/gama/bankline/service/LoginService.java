@@ -43,14 +43,14 @@ public class LoginService {
 		
 		if (verificacaoSenha) {
 			Conta conta = contaRepository.findByNumero(usuario.getLogin());
-			return retornaSessaoDto(conta);
+			return retornaSessaoDto(conta, usuario);
 		} else {
 			throw new LoginException("Login e/ou senha inválidos");
 		}
 
 	}
 
-	private SessaoDTO retornaSessaoDto(Conta conta) {
+	private SessaoDTO retornaSessaoDto(Conta conta, Usuario usuario) {
 
 		SessaoDTO sessao = new SessaoDTO();
 					
@@ -58,6 +58,7 @@ public class LoginService {
 		sessao.setDataFim(new Date(System.currentTimeMillis() + jwtService.retornaDataExpiracaoToken()));
 		sessao.setConta(conta);
 		sessao.setToken(jwtService.gerarToken(conta.getUsuario()));
+		sessao.setUsuario(usuario);
 
 		return sessao;
 	
