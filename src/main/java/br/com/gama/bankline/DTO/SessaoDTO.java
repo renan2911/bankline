@@ -16,12 +16,13 @@ import lombok.Setter;
 public class SessaoDTO {
 
 	private Conta conta;
+	private Usuario usuario;
 	private Date dataInicio;
 	private Date dataFim;
 	private String token;
 
-	public static SessaoDTO fromDTO(Conta conta, Date dataInicio, Date dataFim, String token) {
-		return new SessaoDTO(conta, dataInicio, dataFim, token);
+	public static SessaoDTO fromDTO(Conta conta, Usuario usuario, Date dataInicio, Date dataFim, String token) {
+		return new SessaoDTO(conta, usuario, dataInicio, dataFim, token);
 
 	}
 }

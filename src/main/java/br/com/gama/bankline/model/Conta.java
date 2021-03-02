@@ -33,7 +33,7 @@ public class Conta {
 	//@Column(nullable = false)
 	//private ContaTipo contaTipo;
 	
-	//@JsonIgnore
+	@JsonIgnore
 	@OneToOne
 	private Usuario usuario;
 	

@@ -37,6 +37,8 @@ public class Security extends WebSecurityConfigurerAdapter{
 		.authorizeRequests()
 		.antMatchers(HttpMethod.POST, "/usuarios").permitAll()
 		.antMatchers(HttpMethod.POST, "/login").permitAll()
+		.antMatchers(HttpMethod.POST, "/lancamentos/planos-conta").permitAll()
+		.antMatchers(HttpMethod.GET, "/lancamentos/planos-conta").permitAll()
 		.anyRequest().authenticated()
        	.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 		.and().headers().frameOptions().sameOrigin();

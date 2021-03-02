@@ -45,10 +45,25 @@ public class Lancamento {
 	private Integer contaId;*/
 
 	
+	
+	
 	public Long getId() {
 		return id;
 	}
 	
+	public Lancamento(LocalDate data, Double valor, String descricao, String numConta, String numContaDest,
+			PlanoConta planoConta, Conta conta) {
+		this.data = data;
+		this.valor = valor;
+		this.descricao = descricao;
+		this.numConta = numConta;
+		this.numContaDest = numContaDest;
+		this.planoConta = planoConta;
+		this.conta = conta;
+	}
+
+	public Lancamento() {}
+
 	public void setId(Long id) {
 		this.id = id;
 	}

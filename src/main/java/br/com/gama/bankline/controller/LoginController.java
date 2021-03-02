@@ -17,10 +17,10 @@ import lombok.AllArgsConstructor;
 public class LoginController {
 	
 	private LoginService loginService;
-	
+
 	@PostMapping
 	public SessaoDTO insert(@RequestBody LoginDTO loginDTO) {
 		return loginService.autenticarUsuario(loginDTO);
-		
+
 	}
 }

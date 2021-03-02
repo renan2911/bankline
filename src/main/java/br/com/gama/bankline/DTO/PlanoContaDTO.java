@@ -8,10 +8,12 @@ import br.com.gama.bankline.enums.TipoPlanoConta;
 import br.com.gama.bankline.model.PlanoConta;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @AllArgsConstructor
 public class PlanoContaDTO {
 	
