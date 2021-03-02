@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.com.gama.bankline.model.Usuario;
 
+
 public interface UsuarioRepository {
 	
 	public List<Usuario> listar();

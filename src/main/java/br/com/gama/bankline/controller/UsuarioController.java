@@ -18,10 +18,6 @@ public class UsuarioController {
 	@org.springframework.beans.factory.annotation.Autowired(required=true)
 	UsuarioRepository usuarioRepository;
 	
-	@GetMapping
-	public List<Usuario> listar(){
-		return usuarioRepository.listar();
-	}
 	
 	@PostMapping
 	public Usuario adicionar(@RequestBody Usuario usuario) {
