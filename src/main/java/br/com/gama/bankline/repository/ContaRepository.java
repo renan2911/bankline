@@ -1,14 +1,15 @@
 package br.com.gama.bankline.repository;
 
-import java.util.List;
-
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.gama.bankline.model.Conta;
 
-
-public interface ContaRepository {
+@Repository
+public interface ContaRepository extends JpaRepository<Conta, Long>{
 	
-	public List<Conta> listar();
-	public Conta salvar(Conta conta);
+	@Transactional(readOnly = true)
+	Conta findByNumero(String numero);
+	
 }

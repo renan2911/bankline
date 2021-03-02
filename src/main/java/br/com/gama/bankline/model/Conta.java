@@ -7,10 +7,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import br.com.gama.bankline.enums.ContaTipo;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 public class Conta {
 
@@ -24,54 +28,19 @@ public class Conta {
 	@Column(nullable = false,length = 20)
 	private String numero;
 	
-	@Column(nullable = false)
-	private ContaTipo contaTipo;
+	//@Column(nullable = false)
+	//private ContaTipo contaTipo;
 	
 	//@JsonIgnore
 	@OneToOne
 	private Usuario usuario;
 	
-	/*@Column(name="fk_usuario_id", nullable=false)
-	private Long usuarioId;*/
-
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-
-
-	public Double getSaldo() {
-		return saldo;
-	}
-
-	public void setSaldo(Double saldo) {
-		this.saldo = saldo;
-	}
-
-	public String getNumero() {
-		return numero;
-	}
-
-	public void setNumero(String numero) {
+	
+	
+	
+	public Conta(String numero, Usuario usuario) {
 		this.numero = numero;
-	}
-
-	public ContaTipo getContaTipo() {
-		return contaTipo;
-	}
-
-	public void setContaTipo(ContaTipo contaTipo) {
-		this.contaTipo = contaTipo;
+		this.usuario = usuario;
 	}
 
 	@Override
@@ -98,4 +67,14 @@ public class Conta {
 			return false;
 		return true;
 	}
+
+	public Conta(Long id, Double saldo, String numero, Usuario usuario) {
+		super();
+		this.id = id;
+		this.saldo = saldo;
+		this.numero = numero;
+		this.usuario = usuario;
+	}
+
+	
 }
