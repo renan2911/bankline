@@ -41,12 +41,4 @@ public class Security extends WebSecurityConfigurerAdapter{
        	.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 		.and().headers().frameOptions().sameOrigin();
 	}
-	
-	@Bean
-	CorsConfigurationSource corsConfigurationSource() {
-      UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-      source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
-      return source;
-	}
-	
 }
