@@ -1,5 +1,7 @@
 package br.com.gama.bankline.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.gama.bankline.DTO.DataResponseDTO;
 import br.com.gama.bankline.DTO.MensagemResponseDTO;
 import br.com.gama.bankline.DTO.PlanoContaDTO;
 import br.com.gama.bankline.service.PlanoContaService;
@@ -25,13 +28,13 @@ public class PlanoContaController {
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public MensagemResponseDTO CriarPlanosConta(@RequestBody @Valid PlanoContaDTO planoContaDTO) {
+	public DataResponseDTO CriarPlanosConta(@RequestBody @Valid PlanoContaDTO planoContaDTO) {
 		return planoContaService.salvarPlanoConta(planoContaDTO);
 	}
 	
 	@GetMapping
 	@ResponseStatus(HttpStatus.FOUND)
-	public MensagemResponseDTO LerPlanosConta(@RequestBody @Valid PlanoContaDTO planoContaDTO) {
+	public DataResponseDTO LerPlanosConta(@RequestBody @Valid PlanoContaDTO planoContaDTO) {
 		return planoContaService.LerPlanoConta();
 	}
 	
