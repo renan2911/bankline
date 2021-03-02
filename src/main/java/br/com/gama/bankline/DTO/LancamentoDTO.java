@@ -2,8 +2,8 @@ package br.com.gama.bankline.DTO;
 
 import java.time.LocalDate;
 
+import br.com.gama.bankline.model.Lancamento;
 import br.com.gama.bankline.model.PlanoConta;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -29,5 +29,15 @@ public class LancamentoDTO {
 		this.numConta = numConta;
 		this.numContaDest = numContaDest;
 		this.planoConta = planoConta;
+	}
+	
+	public LancamentoDTO(Lancamento lancamento) {
+		this.id = lancamento.getId();
+		this.data = lancamento.getData();
+		this.valor = lancamento.getValor();
+		this.descricao = lancamento.getDescricao();
+		this.numConta = lancamento.getNumConta();
+		this.numContaDest = lancamento.getNumContaDest();
+		this.planoConta = lancamento.getPlanoConta();
 	}
 }
