@@ -3,6 +3,7 @@ package br.com.gama.bankline.service;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.gama.bankline.DTO.LoginDTO;
@@ -20,7 +21,10 @@ import lombok.AllArgsConstructor;
 @Service
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class LoginService {
-
+	
+	@Autowired
+	private PasswordEncoder encoder;
+	
 	private UsuarioRepository usuarioRepository;
 
 	private ContaRepository contaRepository;
@@ -34,11 +38,11 @@ public class LoginService {
 		if (usuario == null) {
 			throw new DataBaseException("Usuário e/ou senha inválidos");
 		}
-
-		if (LoginDTO.getSenha().equals(usuario.getSenha())) {
-
+		
+		boolean verificacaoSenha = encoder.matches(LoginDTO.getSenha(), usuario.getSenha());
+		
+		if (verificacaoSenha) {
 			Conta conta = contaRepository.findByNumero(usuario.getLogin());
-
 			return retornaSessaoDto(conta);
 		} else {
 			throw new LoginException("Login e/ou senha inválidos");

@@ -3,6 +3,7 @@ package br.com.gama.bankline.DTO;
 import java.util.Date;
 
 import br.com.gama.bankline.model.Conta;
+import br.com.gama.bankline.model.Usuario;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,5 +24,4 @@ public class SessaoDTO {
 		return new SessaoDTO(conta, dataInicio, dataFim, token);
 
 	}
-
 }

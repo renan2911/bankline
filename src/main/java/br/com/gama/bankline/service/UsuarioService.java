@@ -1,6 +1,7 @@
 package br.com.gama.bankline.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.gama.bankline.DTO.MensagemResponseDTO;
@@ -13,6 +14,9 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class UsuarioService {
 	
+	@Autowired
+	private PasswordEncoder encoder;
+	
 	private UsuarioRepository usuarioRepository;
 	
 	private ContaService contaService;
@@ -21,7 +25,11 @@ public class UsuarioService {
 	public MensagemResponseDTO salvarUsuario(UsuarioDTO usuarioDTO) {
 		
 		Usuario usuario = new UsuarioDTO().fromModel(usuarioDTO);
-
+		
+		String senhaCrip = encoder.encode(usuario.getSenha());
+		
+		usuario.setSenha(senhaCrip);
+		
 		Usuario usuarioSalvo = usuarioRepository.save(usuario);
 		
 		contaService.salvarConta(usuarioSalvo);

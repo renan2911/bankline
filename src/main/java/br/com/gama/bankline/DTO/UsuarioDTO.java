@@ -44,6 +44,7 @@ public class UsuarioDTO {
 	*/
 	
 	public Usuario fromModel(UsuarioDTO usuarioDTO) {
+		System.out.println(usuarioDTO.getCpf());
 		return new Usuario(usuarioDTO.getLogin(), usuarioDTO.getSenha(), usuarioDTO.getCpf(), usuarioDTO.getNome());
 	}
 	

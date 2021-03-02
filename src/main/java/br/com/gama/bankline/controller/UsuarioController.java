@@ -16,8 +16,8 @@ import br.com.gama.bankline.service.UsuarioService;
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping("/usuarios")
 @AllArgsConstructor(onConstructor = @__(@Autowired))
+@RequestMapping("/usuarios")
 public class UsuarioController {
 
 	
