@@ -28,9 +28,9 @@ public class PlanoContaDTO {
 	private TipoPlanoConta tipoPlanoConta;
 	
 	public PlanoContaDTO (PlanoConta planoConta) {
-		descricao = planoConta.getDescricao();
-		login = planoConta.getUsuario().getLogin();
-		tipoPlanoConta = planoConta.getTipoPlanoConta();
+		this.descricao = planoConta.getDescricao();
+		this.login = planoConta.getUsuario().getLogin();
+		this.tipoPlanoConta = planoConta.getTipoPlanoConta();
 	}
 	
 	

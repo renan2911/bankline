@@ -2,6 +2,8 @@ package br.com.gama.bankline.DTO;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.com.gama.bankline.model.Conta;
 import br.com.gama.bankline.model.Usuario;
 import lombok.AllArgsConstructor;
@@ -20,9 +22,12 @@ public class SessaoDTO {
 	private Date dataInicio;
 	private Date dataFim;
 	private String token;
+	
+	@JsonIgnore
+	private String login;
 
-	public static SessaoDTO fromDTO(Conta conta, Usuario usuario, Date dataInicio, Date dataFim, String token) {
-		return new SessaoDTO(conta, usuario, dataInicio, dataFim, token);
+	public static SessaoDTO fromDTO(Conta conta, Usuario usuario, Date dataInicio, Date dataFim, String token, String login) {
+		return new SessaoDTO(conta, usuario, dataInicio, dataFim, token, login);
 
 	}
 }

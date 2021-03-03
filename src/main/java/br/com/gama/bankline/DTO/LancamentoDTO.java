@@ -53,7 +53,6 @@ public class LancamentoDTO {
 	}
 	
 	public LancamentoDTO(Lancamento lancamento) {
-		this.id = lancamento.getId();
 		this.data = lancamento.getData();
 		this.valor = lancamento.getValor();
 		this.descricao = lancamento.getDescricao();

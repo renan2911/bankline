@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,10 +31,10 @@ public class PlanoContaController {
 		return ResponseEntity.ok().body(planoContaService.salvarPlanoConta(planoContaDTO));
 	}
 
-	@GetMapping
-	@ResponseStatus(HttpStatus.FOUND)
-	public DataResponseDTO LerPlanosConta(@RequestBody @Valid PlanoContaDTO planoContaDTO) {
-		return planoContaService.LerPlanoConta();
+	@GetMapping("/{login}")
+	@ResponseStatus(HttpStatus.OK)
+	public DataResponseDTO LerPlanosConta(@PathVariable(value="login") String login) {
+		return planoContaService.lerPlanoConta(login);
 	}
 
 }

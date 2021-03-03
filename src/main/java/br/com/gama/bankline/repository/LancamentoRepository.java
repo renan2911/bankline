@@ -14,7 +14,7 @@ import br.com.gama.bankline.model.Lancamento;
 
 @Repository
 public interface LancamentoRepository extends JpaRepository<Lancamento, Long> {
-	@Query("Select L from Lancamento L where L.num_conta = ?1 and L.data >= ?2 and L.data <= ?3")
+	@Query("Select L from Lancamento L where L.numConta = ?1 and L.data >= ?2 and L.data <= ?3")
 	@Transactional()
 	List<Lancamento> findByDatas(String numeroConta, LocalDate dataInicio, LocalDate dataFim);
 

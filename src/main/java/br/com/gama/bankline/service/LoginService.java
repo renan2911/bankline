@@ -1,9 +1,13 @@
 package br.com.gama.bankline.service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +22,10 @@ import br.com.gama.bankline.model.Conta;
 import br.com.gama.bankline.model.Usuario;
 import br.com.gama.bankline.repository.ContaRepository;
 import br.com.gama.bankline.repository.UsuarioRepository;
+import br.com.gama.bankline.security.JWTAuthorizationFilter;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.AllArgsConstructor;
 
 @Service
@@ -64,8 +71,9 @@ public class LoginService {
 		sessao.setDataInicio(new Date(System.currentTimeMillis()));
 		sessao.setDataFim(new Date(System.currentTimeMillis() + jwtService.retornaDataExpiracaoToken()));
 		sessao.setConta(conta);
-		sessao.setToken(jwtService.gerarToken(conta.getUsuario()));
+		sessao.setLogin(usuario.getLogin());
 		sessao.setUsuario(usuario);
+		sessao.setToken(JWTAuthorizationFilter.PREFIX + TokenGerado(sessao));
 
 		return sessao;
 
@@ -115,8 +123,20 @@ public class LoginService {
 		return MensagemResponseDTO.builder().mensagem(mensagem + senhaTemporaria).build();
 	}
 	
+	private String TokenGerado(SessaoDTO sessao) {
+		String role = "ROLE_U";
+		List<GrantedAuthority> grantedAuthorities = AuthorityUtils.commaSeparatedStringToAuthorityList(role);
 
-	private boolean validarToken(String token) throws TokenExpiradoException {
+		String token = Jwts.builder().setSubject(sessao.getLogin())
+				.claim("authorities",
+						grantedAuthorities.stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
+				.setIssuedAt(sessao.getDataInicio()).setExpiration(sessao.getDataFim())
+				.signWith(SignatureAlgorithm.HS512, JWTAuthorizationFilter.SECRET.getBytes()).compact();
+
+		return token;
+	}
+
+	/*private boolean validarToken(String token) throws TokenExpiradoException {
 		Claims claims = jwtService.decodificarToken(token);
 		if (claims != null) {
 			String usuario = claims.getSubject();
@@ -132,6 +152,6 @@ public class LoginService {
 
 		return false;
 
-	}
+	}*/
 
 }

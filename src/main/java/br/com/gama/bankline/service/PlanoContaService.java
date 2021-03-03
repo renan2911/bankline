@@ -65,18 +65,24 @@ public class PlanoContaService {
 	}
 		
 	
-	public DataResponseDTO LerPlanoConta() {
+	public DataResponseDTO lerPlanoConta(String login) {
+		Optional<Usuario> usuario = usuarioRepository.findByLogin(login);
+		
+		if(usuario == null) {
+			throw new DataBaseException("Login inválido");
+		}
+		
 		
 		ModelMapper modelMapper = new ModelMapper();
 		
-		List<PlanoConta> planoContaSalvo = planoContaRepository.findAll();
+		List<PlanoConta> planoContaSalvo = planoContaRepository.findDistinctPeopleByLastnameOrFirstname(login);
 		
 		List<PlanoContaDTO> results = modelMapper.map(planoContaSalvo, new TypeToken<List<PlanoContaDTO>>(){}.getType());
 
 	    DataResponseDTO response = new DataResponseDTO ();
 	    response.setSuccess(true);
 	    response.setCount(planoContaSalvo.size());
-	    //response.setData(results);
+	    response.setData(results);
 	    return response;
 //		return planoContaSalvo.map;//criarMensagemResponse((long)planoContaSalvo.size(), "PlanoConta encontrados. Id: ");
 	}
