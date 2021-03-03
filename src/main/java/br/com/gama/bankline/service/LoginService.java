@@ -89,7 +89,8 @@ public class LoginService {
 			
 			if (novaSenhaDTO.getSenhaTemporaria().equals(usuarioEncontrado.getSenhaTemporaria())) {
 				
-				usuarioEncontrado.setSenha(novaSenhaDTO.getSenha());
+				String senhaCrip = encoder.encode(novaSenhaDTO.getSenha());
+				usuarioEncontrado.setSenha(senhaCrip);
 
 				Usuario usuarioAlterado = usuarioRepository.save(usuarioEncontrado);
 

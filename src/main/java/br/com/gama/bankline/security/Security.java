@@ -41,6 +41,8 @@ public class Security extends WebSecurityConfigurerAdapter{
 		.antMatchers(SWAGGER_ALL).permitAll()
 		.antMatchers(HttpMethod.POST, "/usuarios").permitAll()
 		.antMatchers(HttpMethod.POST, "/login").permitAll()
+		.antMatchers(HttpMethod.POST, "/login/alterarSenha").permitAll()
+		.antMatchers(HttpMethod.POST, "/login/solicitarSenha").permitAll()
 		.anyRequest().authenticated()
        	.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 		.and().headers().frameOptions().sameOrigin();
