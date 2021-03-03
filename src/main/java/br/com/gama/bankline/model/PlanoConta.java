@@ -30,6 +30,7 @@ public class PlanoConta {
 	private Usuario usuario;
 	
 	
+	
 	public PlanoConta() {
 	}
 	

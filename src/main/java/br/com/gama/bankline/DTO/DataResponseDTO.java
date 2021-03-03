@@ -2,6 +2,7 @@ package br.com.gama.bankline.DTO;
 
 import java.util.List;
 
+import br.com.gama.bankline.model.PlanoConta;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

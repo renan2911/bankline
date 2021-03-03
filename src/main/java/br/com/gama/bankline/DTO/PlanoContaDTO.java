@@ -2,10 +2,14 @@ package br.com.gama.bankline.DTO;
 
 import javax.validation.constraints.Size;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
 import br.com.gama.bankline.enums.TipoPlanoConta;
 import br.com.gama.bankline.model.PlanoConta;
+import br.com.gama.bankline.model.Usuario;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +25,7 @@ public class PlanoContaDTO {
 	@Size(max = 350, message="A descrição deve deve até " + "{max} caracteres.")
 	private String descricao;
 	
+	@NotNull
 	@Size(min = 2, max = 20, message="O login deve é obrigatório")
 	private String login;
 	
@@ -29,7 +34,8 @@ public class PlanoContaDTO {
 	
 	public PlanoContaDTO (PlanoConta planoConta) {
 		this.descricao = planoConta.getDescricao();
-		this.login = planoConta.getUsuario().getLogin();
+		Usuario usuario = planoConta.getUsuario();
+		this.login = usuario.getLogin();
 		this.tipoPlanoConta = planoConta.getTipoPlanoConta();
 	}
 	
