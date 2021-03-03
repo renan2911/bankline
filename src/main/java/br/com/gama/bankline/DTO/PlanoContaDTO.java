@@ -18,19 +18,30 @@ import lombok.Setter;
 public class PlanoContaDTO {
 	
 	@NotNull
-	@Size(max = 350)
+	@Size(max = 350, message="A descrição deve deve até " + "{max} caracteres.")
 	private String descricao;
+	
+	@Size(min = 2, max = 20, message="O login deve é obrigatório")
+	private String login;
 	
 	@NotNull
 	private TipoPlanoConta tipoPlanoConta;
 	
-	public PlanoConta fromModel(PlanoContaDTO usuarioDTO) {
+	public PlanoContaDTO (PlanoConta planoConta) {
+		descricao = planoConta.getDescricao();
+		login = planoConta.getUsuario().getLogin();
+		tipoPlanoConta = planoConta.getTipoPlanoConta();
+	}
+	
+	
+	/*
+	public PlanoConta fromModel(PlanoContaInsertDTO usuarioDTO) {
 		return new PlanoConta(usuarioDTO.getDescricao(), usuarioDTO.getTipoPlanoConta());
 	}
 	
-	public static PlanoContaDTO fromDTO(PlanoConta usuario) {
-		return new PlanoContaDTO(usuario.getDescricao(), usuario.getTipoPlanoConta());
+	public static PlanoContaInsertDTO fromDTO(PlanoConta usuario) {
+		return new PlanoContaInsertDTO(usuario.getDescricao(), usuario.getTipoPlanoConta());
 	}
-	
+	*/
 
 }

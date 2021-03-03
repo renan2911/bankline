@@ -26,16 +26,23 @@ public class Usuario {
 
 	@Column(nullable = false, length = 100)
 	private String nome;
+	
+	@Column(nullable = false, length = 100)
+	private String email;
 
 	@Column(nullable = false, length = 20, unique = true)
 	private String login;
 
 	@Column(nullable = false)
 	private String senha;
+	
+	@Column(columnDefinition = "")
+	private String senhaTemporaria;
 
-	public Usuario(String login, String senha, String cpf, String nome) {
+	public Usuario(String login, String senha, String cpf, String nome, String email) {
 		this.cpf = cpf;
 		this.nome = nome;
+		this.email = email;
 		this.login = login;
 		this.senha = senha;
 	}

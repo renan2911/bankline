@@ -5,9 +5,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import br.com.gama.bankline.enums.TipoPlanoConta;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 public class PlanoConta {
 	
@@ -21,36 +26,17 @@ public class PlanoConta {
 	@Column(nullable = false)
 	private TipoPlanoConta tipoPlanoConta;
 	
+	@ManyToOne
+	private Usuario usuario;
+	
+	
 	public PlanoConta() {
 	}
 	
-	public PlanoConta(String descricao, TipoPlanoConta tipoPlanoConta) {
+	public PlanoConta(String descricao, TipoPlanoConta tipoPlanoConta, Usuario usuario) {
 		this.descricao = descricao;
 		this.tipoPlanoConta = tipoPlanoConta;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	public TipoPlanoConta getTipoPlanoConta() {
-		return tipoPlanoConta;
-	}
-
-	public void setTipoPlanoConta(TipoPlanoConta tipoPlanoConta) {
-		this.tipoPlanoConta = tipoPlanoConta;
+		this.usuario = usuario;
 	}
 
 	

@@ -1,6 +1,5 @@
 package br.com.gama.bankline.DTO;
 
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.br.CPF;
@@ -17,39 +16,28 @@ import lombok.Setter;
 @AllArgsConstructor
 public class UsuarioDTO {
 	
-	@NotNull
 	@CPF
 	private String cpf;
 	
-	@NotNull
-	@Size(min = 3, max = 20)
+	@Size(min = 2, max = 20, message="O login deve até " + "{max} caracteres.")
 	private String login;
 	
-	@NotNull
-	@Size(min = 3, max = 100)
+	@Size(min = 3, max = 100, message = "Nome é obrigatório, deve ter entre {min} e " + "{max} caracteres.")
 	private String nome;
 	
-	@NotNull
-	@Size(min = 4, max = 10)
+	@Size(min = 3, max = 100, message = "Email é obrigatório.")
+	private String email;
+	
+	@Size(min=4,max=20,message="A senha é obrigatória, deve ter entre {min} e " + "{max} caracteres.")
 	private String senha;
 	
-	/*
-	public UsuarioDTO(Usuario usuario) {
-		login = usuario.getLogin();
-		senha = usuario.getSenha();
-		cpf = usuario.getCpf();
-		nome = usuario.getNome();
-	}
-	
-	*/
 	
 	public Usuario fromModel(UsuarioDTO usuarioDTO) {
-		System.out.println(usuarioDTO.getCpf());
-		return new Usuario(usuarioDTO.getLogin(), usuarioDTO.getSenha(), usuarioDTO.getCpf(), usuarioDTO.getNome());
+		return new Usuario(usuarioDTO.getLogin(), usuarioDTO.getSenha(), usuarioDTO.getCpf(), usuarioDTO.getNome(), usuarioDTO.getEmail());
 	}
 	
 	public static UsuarioDTO fromDTO(Usuario usuario) {
-		return new UsuarioDTO(usuario.getLogin(), usuario.getSenha(), usuario.getCpf(), usuario.getNome());
+		return new UsuarioDTO(usuario.getLogin(), usuario.getSenha(), usuario.getCpf(), usuario.getNome(), usuario.getEmail());
 	}
 	
 }

@@ -20,7 +20,12 @@ public class StandardError implements Serializable {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-'T'HH:mm:ss'Z'", timezone = "GMT")
 	private Instant timestap;
 	private Integer status;
-	private String message;
+	private String mensagem;
 	private String path;
+	
+	public StandardError(Integer status, String mensagem) {
+		this.status = status;
+		this.mensagem = mensagem;
+	}
 
 }
