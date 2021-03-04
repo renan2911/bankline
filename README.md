@@ -1,4 +1,4 @@
-# Grupo5-thejavinhos-tvchannel :tv:
+# Grupo
 
 ### Equipe SULTANS OF SPRING :
 - [Fernanda](https://github.com/)
