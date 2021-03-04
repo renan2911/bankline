@@ -11,5 +11,4 @@ public interface ContaRepository extends JpaRepository<Conta, Long>{
 	
 	@Transactional(readOnly = true)
 	Conta findByNumero(String numero);
-	
 }

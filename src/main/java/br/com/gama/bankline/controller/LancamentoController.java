@@ -1,17 +1,16 @@
 package br.com.gama.bankline.controller;
 
-import java.time.LocalDate;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.gama.bankline.DTO.ContaDTO;
 import br.com.gama.bankline.DTO.LancamentoDTO;
+import br.com.gama.bankline.DTO.LancamentoResponseDTO;
 import br.com.gama.bankline.service.LancamentoService;
 
 @RestController
@@ -20,10 +19,8 @@ public class LancamentoController {
 	@Autowired
 	private LancamentoService lancamentoService;
 	
-	@GetMapping
-	public ResponseEntity<List<LancamentoDTO>> getLancamentos(@RequestParam String numeroConta, @RequestParam LocalDate dataInicio,
-			@RequestParam LocalDate dataFim) {
-		List<LancamentoDTO> collect = lancamentoService.getLancamentosByData(numeroConta, dataFim, dataInicio, dataFim) .stream().map(LancamentoDTO::new).collect(Collectors.toList());
-		return ResponseEntity.ok(collect);
+	@PostMapping
+	public ResponseEntity<LancamentoResponseDTO> realizarLancamento(@RequestBody LancamentoDTO lancamentoDTO) {
+		return new ResponseEntity<LancamentoResponseDTO>(lancamentoService.salvarLancamento(lancamentoDTO), HttpStatus.CREATED);
 	}
 }

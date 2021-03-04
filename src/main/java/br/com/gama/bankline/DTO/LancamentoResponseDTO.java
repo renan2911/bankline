@@ -4,9 +4,7 @@ import java.time.LocalDate;
 
 import javax.validation.constraints.NotNull;
 
-import br.com.gama.bankline.model.Conta;
 import br.com.gama.bankline.model.Lancamento;
-import br.com.gama.bankline.model.PlanoConta;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,7 +14,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class LancamentoDTO {
+public class LancamentoResponseDTO {
 	
 	@NotNull
 	private LocalDate data;
@@ -35,12 +33,19 @@ public class LancamentoDTO {
 	@NotNull
 	private Long idPlanoConta;
 	
-	public LancamentoDTO(Lancamento lancamento) {
+	private Double saldoConta;
+	
+	public LancamentoResponseDTO(Lancamento lancamento) {
+		this.saldoConta = lancamento.getConta().getSaldo();
 		this.data = lancamento.getData();
 		this.valor = lancamento.getValor();
 		this.descricao = lancamento.getDescricao();
 		this.numConta = lancamento.getNumConta();
 		this.numContaDest = lancamento.getNumContaDest();
 		this.idPlanoConta = lancamento.getPlanoConta().getId();
+	}
+	
+	public LancamentoResponseDTO fromDTO(Lancamento lancamento) {
+		return new LancamentoResponseDTO(lancamento);
 	}
 }

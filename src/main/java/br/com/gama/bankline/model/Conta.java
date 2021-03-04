@@ -78,5 +78,15 @@ public class Conta {
 		this.usuario = usuario;
 	}
 
+	public Double Depositar(Double valor) {
+		return this.saldo +=valor;
+	}
 	
+	public boolean VerificarSaldo(Double valor) {
+		return this.saldo < valor ? false : true; 
+	}
+	
+	public void Sacar(Double valor) {
+		this.saldo -=valor;
+	}
 }

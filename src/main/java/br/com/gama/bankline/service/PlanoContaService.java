@@ -2,6 +2,7 @@ package br.com.gama.bankline.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -77,12 +78,14 @@ public class PlanoContaService {
 		
 		List<PlanoConta> planoContaSalvo = planoContaRepository.findDistinctPeopleByLastnameOrFirstname(login);
 		
-		List<PlanoContaDTO> results = modelMapper.map(planoContaSalvo, new TypeToken<List<PlanoContaDTO>>(){}.getType());
-
+		//List<PlanoContaDTO> results = modelMapper.map(planoContaSalvo, new TypeToken<List<PlanoContaDTO>>(){}.getType());
+		
+		List<PlanoContaDTO> listaDto = planoContaSalvo.stream().map(obj -> new PlanoContaDTO(obj)).collect(Collectors.toList());
+		
 	    DataResponseDTO response = new DataResponseDTO ();
 	    response.setSuccess(true);
 	    response.setCount(planoContaSalvo.size());
-	    response.setData(results);
+	    response.setData(listaDto);
 	    return response;
 //		return planoContaSalvo.map;//criarMensagemResponse((long)planoContaSalvo.size(), "PlanoConta encontrados. Id: ");
 	}

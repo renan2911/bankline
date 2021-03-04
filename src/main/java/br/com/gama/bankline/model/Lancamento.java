@@ -28,7 +28,7 @@ public class Lancamento {
 	@Column(nullable = false, length = 250)
 	private String descricao;
 	
-	@Column(nullable = true)
+	@Column(nullable = false)
 	private String numConta;
 	
 	@Column(nullable = true)
@@ -40,12 +40,7 @@ public class Lancamento {
 	
 	@ManyToOne
 	private Conta conta;
-	
-	/*@Column(name="fk_conta_id", nullable=false)
-	private Integer contaId;*/
 
-	
-	
 	
 	public Long getId() {
 		return id;
