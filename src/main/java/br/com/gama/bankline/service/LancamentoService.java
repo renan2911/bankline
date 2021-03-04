@@ -1,5 +1,7 @@
 package br.com.gama.bankline.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,26 +30,27 @@ public class LancamentoService {
 		
 		
 		Conta contaOrigem = contaRepository.findByNumero(lancamentoDTO.getNumConta());
-		PlanoConta planoConta = planoContaRepository.getOne(lancamentoDTO.getIdPlanoConta());
+		Optional<PlanoConta> planoConta = planoContaRepository.findById(lancamentoDTO.getIdPlanoConta());
 		
 		if((contaOrigem != null && planoConta != null)) {
+			
+			PlanoConta planoContaEncontrado = planoConta.get();
 			
 			Lancamento lancamento = new Lancamento();
 			lancamento.setConta(contaOrigem);
 			lancamento.setData(lancamentoDTO.getData());
 			lancamento.setDescricao(lancamentoDTO.getDescricao());
 			lancamento.setNumConta(lancamentoDTO.getNumConta());
-			lancamento.setPlanoConta(planoConta);
+			lancamento.setPlanoConta(planoContaEncontrado);
 			lancamento.setValor(lancamentoDTO.getValor());
 			lancamento.setConta(contaOrigem);
 			
-			if((planoConta.getTipoPlanoConta() == TipoPlanoConta.D) && contaOrigem.verificarSaldo(lancamentoDTO.getValor())) {
+			if((planoContaEncontrado.getTipoPlanoConta() == TipoPlanoConta.D) && contaOrigem.verificarSaldo(lancamentoDTO.getValor())) {
 				contaOrigem.sacar(lancamento.getValor());
-				lancamentoRepository.save(lancamento);
 				
-			}else if((planoConta.getTipoPlanoConta() == TipoPlanoConta.T && contaOrigem.verificarSaldo(lancamentoDTO.getValor()) && lancamento.getNumContaDest() != null)) {
+			}else if((planoContaEncontrado.getTipoPlanoConta() == TipoPlanoConta.T && contaOrigem.verificarSaldo(lancamentoDTO.getValor()) && lancamentoDTO.getNumContaDest() != null)) {
 				
-				Conta contaDestino = contaRepository.findByNumero(lancamentoDTO.getNumConta());
+				Conta contaDestino = contaRepository.findByNumero(lancamentoDTO.getNumContaDest());
 				
 				if(contaDestino != null) {
 					lancamento.setNumContaDest(contaDestino.getNumero());
@@ -55,16 +58,22 @@ public class LancamentoService {
 					contaOrigem.sacar(lancamentoDTO.getValor());
 					contaDestino.depositar(lancamentoDTO.getValor());
 					contaRepository.save(contaDestino);
+					
+				}else {
+					throw new DataBaseException("Conta destino inexistente.");
 				}
-				
-				throw new DataBaseException("Conta destino inexistente.");
+
+
+			}else if((planoContaEncontrado.getTipoPlanoConta() == TipoPlanoConta.R)){
+				contaOrigem.depositar(lancamento.getValor());
 				
 			}else {
-				contaOrigem.depositar(lancamento.getValor());
+				throw new DataBaseException("Erro durante o cadastro de lançamento. Saldo insuficiente.");
 			}
 			
-			contaRepository.save(contaOrigem);
 			
+			contaRepository.save(contaOrigem);
+			lancamentoRepository.save(lancamento);
 			
 			return new LancamentoResponseDTO().fromDTO(lancamento);
 			

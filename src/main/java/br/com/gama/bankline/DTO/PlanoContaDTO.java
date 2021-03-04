@@ -2,7 +2,6 @@ package br.com.gama.bankline.DTO;
 
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
 import br.com.gama.bankline.enums.TipoPlanoConta;
@@ -24,7 +23,7 @@ public class PlanoContaDTO {
 	private String descricao;
 	
 	@NotNull
-	@Size(min = 2, max = 20, message="O login deve é obrigatório")
+	@Size(min = 2, max = 20, message="O login é obrigatório")
 	private String login;
 	
 	@NotNull

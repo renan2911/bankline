@@ -47,4 +47,10 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 			return ResponseEntity.status(status).body(err);
 		}
 		
+	    @ExceptionHandler(AuthorizationException.class)
+		public ResponseEntity<StandardError> authorization(AuthorizationException e, HttpServletRequest request) {
+
+			StandardError err = new StandardError(HttpStatus.FORBIDDEN.value(), e.getMessage());
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
+		}
 }
