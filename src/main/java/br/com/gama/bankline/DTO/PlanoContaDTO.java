@@ -18,6 +18,9 @@ import lombok.Setter;
 @AllArgsConstructor
 public class PlanoContaDTO {
 	
+	
+	private Long id;
+	
 	@NotNull
 	@Size(max = 350, message="A descrição deve deve até " + "{max} caracteres.")
 	private String descricao;
@@ -30,6 +33,7 @@ public class PlanoContaDTO {
 	private TipoPlanoConta tipoPlanoConta;
 	
 	public PlanoContaDTO (PlanoConta planoConta) {
+		this.id = planoConta.getId();
 		this.descricao = planoConta.getDescricao();
 		Usuario usuario = planoConta.getUsuario();
 		this.login = usuario.getLogin();
