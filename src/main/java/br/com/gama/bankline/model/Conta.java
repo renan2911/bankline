@@ -71,15 +71,15 @@ public class Conta {
 		this.usuario = usuario;
 	}
 
-	public Double Depositar(Double valor) {
+	public Double depositar(Double valor) {
 		return this.saldo += valor;
 	}
 
-	public boolean VerificarSaldo(Double valor) {
+	public boolean verificarSaldo(Double valor) {
 		return this.saldo < valor ? false : true;
 	}
 
-	public void Sacar(Double valor) {
+	public void sacar(Double valor) {
 		this.saldo -= valor;
 	}
 }

@@ -27,34 +27,50 @@ public class LancamentoService {
 	public LancamentoResponseDTO salvarLancamento(LancamentoDTO lancamentoDTO) {	
 		
 		
-		Conta conta = contaRepository.findByNumero(lancamentoDTO.getNumConta());
+		Conta contaOrigem = contaRepository.findByNumero(lancamentoDTO.getNumConta());
 		PlanoConta planoConta = planoContaRepository.getOne(lancamentoDTO.getIdPlanoConta());
 		
-		Lancamento lancamento = new Lancamento();
-		lancamento.setConta(conta);
-		lancamento.setData(lancamentoDTO.getData());
-		lancamento.setDescricao(lancamentoDTO.getDescricao());
-		lancamento.setNumConta(lancamentoDTO.getNumConta());
-		lancamento.setPlanoConta(planoConta);
-		lancamento.setValor(lancamentoDTO.getValor());
-		lancamento.setConta(conta);
-		
-		if((planoConta.getTipoPlanoConta() == TipoPlanoConta.D) && conta.VerificarSaldo(lancamentoDTO.getValor())) {
-			conta.Sacar(lancamento.getValor());
-			lancamentoRepository.save(lancamento);
-		}else if((planoConta.getTipoPlanoConta() == TipoPlanoConta.T && conta.VerificarSaldo(lancamentoDTO.getValor()) && lancamento.getNumContaDest() != null)) {
+		if((contaOrigem != null && planoConta != null)) {
 			
-		}else {
-			conta.Depositar(lancamento.getValor());
+			Lancamento lancamento = new Lancamento();
+			lancamento.setConta(contaOrigem);
+			lancamento.setData(lancamentoDTO.getData());
+			lancamento.setDescricao(lancamentoDTO.getDescricao());
+			lancamento.setNumConta(lancamentoDTO.getNumConta());
+			lancamento.setPlanoConta(planoConta);
+			lancamento.setValor(lancamentoDTO.getValor());
+			lancamento.setConta(contaOrigem);
+			
+			if((planoConta.getTipoPlanoConta() == TipoPlanoConta.D) && contaOrigem.verificarSaldo(lancamentoDTO.getValor())) {
+				contaOrigem.sacar(lancamento.getValor());
+				lancamentoRepository.save(lancamento);
+				
+			}else if((planoConta.getTipoPlanoConta() == TipoPlanoConta.T && contaOrigem.verificarSaldo(lancamentoDTO.getValor()) && lancamento.getNumContaDest() != null)) {
+				
+				Conta contaDestino = contaRepository.findByNumero(lancamentoDTO.getNumConta());
+				
+				if(contaDestino != null) {
+					lancamento.setNumContaDest(contaDestino.getNumero());
+					
+					contaOrigem.sacar(lancamentoDTO.getValor());
+					contaDestino.depositar(lancamentoDTO.getValor());
+					contaRepository.save(contaDestino);
+				}
+				
+				throw new DataBaseException("Conta destino inexistente.");
+				
+			}else {
+				contaOrigem.depositar(lancamento.getValor());
+			}
+			
+			contaRepository.save(contaOrigem);
+			
+			
+			return new LancamentoResponseDTO().fromDTO(lancamento);
+			
 		}
 		
-		contaRepository.save(conta);
+		throw new DataBaseException("Erro durante o cadastro de lançamento.");
 		
-		try {
-		}catch (Exception e) {
-			throw new DataBaseException("Erro durante o cadastro de lançamento.");
-		}
-		
-		return new LancamentoResponseDTO().fromDTO(lancamento);
 	}
 }

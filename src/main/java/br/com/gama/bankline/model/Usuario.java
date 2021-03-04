@@ -35,7 +35,7 @@ public class Usuario {
 	@Column(nullable = false)
 	private String senha;
 	
-	@Column(columnDefinition = "")
+	@Column(nullable = true, columnDefinition = "")
 	private String senhaTemporaria;
 
 	public Usuario(String login, String senha, String cpf, String nome, String email) {

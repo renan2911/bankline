@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.gama.bankline.DTO.DataResponseDTO;
 import br.com.gama.bankline.DTO.PlanoContaDTO;
+import br.com.gama.bankline.DTO.PlanoContaResponseDTO;
 import br.com.gama.bankline.exception.DataBaseException;
 import br.com.gama.bankline.model.PlanoConta;
 import br.com.gama.bankline.model.Usuario;
@@ -24,7 +25,7 @@ public class PlanoContaService {
 
 	private UsuarioRepository usuarioRepository;
 
-	public PlanoContaDTO salvarPlanoConta(PlanoContaDTO planoContaDTO) {
+	public PlanoContaResponseDTO salvarPlanoConta(PlanoContaDTO planoContaDTO) {
 
 		Optional<Usuario> usuario = usuarioRepository.findByLogin(planoContaDTO.getLogin());
 
@@ -38,7 +39,7 @@ public class PlanoContaService {
 
 			PlanoConta planoContaSalva = planoContaRepository.save(planoConta);
 
-			return new PlanoContaDTO(planoContaSalva);
+			return new PlanoContaResponseDTO(planoContaSalva);
 		}
 
 		throw new DataBaseException("Login inválido");
