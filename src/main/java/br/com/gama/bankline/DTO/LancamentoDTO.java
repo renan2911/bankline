@@ -2,8 +2,9 @@ package br.com.gama.bankline.DTO;
 
 import java.time.LocalDate;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NegativeOrZero;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import br.com.gama.bankline.model.Lancamento;
@@ -19,24 +20,24 @@ import lombok.Setter;
 public class LancamentoDTO {
 	
 
-	@NotBlank
+	@NotNull(message="O data é obrigatória.")
 	private LocalDate data;
 	
-	@NotBlank
+	@Min(value = 1, message="O valor é inválido.")
 	private Double valor;
 	
-	@NotEmpty
+	@NotNull
 	@Size(min = 2, max = 250, message="A descrição é obrigatória e deve ter até " + "{max} caracteres.")
 	private String descricao;
 	
-	@NotEmpty
+	@NotNull
 	@Size(min = 2, max = 20, message="O número da conta é obrigatório e deve ter até " + "{max} caracteres.")
 	private String numConta;
 	
 	
 	private String numContaDest;
 	
-	@NotEmpty
+	
 	private Long idPlanoConta;
 	
 	public LancamentoDTO(Lancamento lancamento) {
