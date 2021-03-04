@@ -7,8 +7,11 @@ import org.springframework.stereotype.Service;
 
 import br.com.gama.bankline.DTO.MensagemResponseDTO;
 import br.com.gama.bankline.DTO.UsuarioDTO;
+import br.com.gama.bankline.enums.TipoPlanoConta;
 import br.com.gama.bankline.exception.DataBaseException;
+import br.com.gama.bankline.model.PlanoConta;
 import br.com.gama.bankline.model.Usuario;
+import br.com.gama.bankline.repository.PlanoContaRepository;
 import br.com.gama.bankline.repository.UsuarioRepository;
 import lombok.AllArgsConstructor;
 
@@ -20,6 +23,8 @@ public class UsuarioService {
 	private PasswordEncoder encoder;
 	
 	private UsuarioRepository usuarioRepository;
+	
+	private PlanoContaRepository planoContaRepository;
 	
 	private ContaService contaService;
 	
@@ -37,6 +42,15 @@ public class UsuarioService {
 			Usuario usuarioSalvo = usuarioRepository.save(usuario);
 			
 			contaService.salvarConta(usuarioSalvo);
+			
+			PlanoConta planoContaD = new PlanoConta("DESPESA",TipoPlanoConta.D, usuarioSalvo);
+			planoContaRepository.save(planoContaD);
+			
+			PlanoConta planoContaR = new PlanoConta("RECEITA",TipoPlanoConta.R, usuarioSalvo);
+			planoContaRepository.save(planoContaR);
+			
+			PlanoConta planoContaT = new PlanoConta("TRANSFERÊNCIA",TipoPlanoConta.T, usuarioSalvo);
+			planoContaRepository.save(planoContaT);
 			
 			return criarMensagemResponse(usuarioSalvo.getId(), "Usuário criado. Id: ");
 			

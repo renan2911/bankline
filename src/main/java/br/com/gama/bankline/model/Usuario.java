@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -35,6 +37,7 @@ public class Usuario {
 	@Column(nullable = false)
 	private String senha;
 	
+	@JsonIgnore
 	@Column(nullable = true, columnDefinition = "")
 	private String senhaTemporaria;
 

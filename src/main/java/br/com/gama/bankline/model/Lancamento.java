@@ -33,6 +33,7 @@ public class Lancamento {
 	@Column(nullable = false)
 	private String numConta;
 	
+	@JsonIgnore
 	@Column(nullable = true)
 	private String numContaDest;
 	
