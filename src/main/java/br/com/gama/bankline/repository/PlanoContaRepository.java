@@ -20,9 +20,3 @@ public interface PlanoContaRepository extends JpaRepository<PlanoConta, Long>{
 	@Query("SELECT pl FROM PlanoConta pl WHERE usuario.login = :login ")
 	List<PlanoConta> findDistinctPeopleByLastnameOrFirstname(@Param("login") String login);
 }
-
-/*
- * SELECT plano FROM PlanoConta plano 
-JOIN PlanoConta.Usuario usuario
-WHERE usuarion.login = :login/ 
- */

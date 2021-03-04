@@ -4,9 +4,7 @@ import java.time.LocalDate;
 
 import javax.validation.constraints.NotNull;
 
-import br.com.gama.bankline.model.Conta;
 import br.com.gama.bankline.model.Lancamento;
-import br.com.gama.bankline.model.PlanoConta;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

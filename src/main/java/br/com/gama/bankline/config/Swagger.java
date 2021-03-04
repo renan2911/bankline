@@ -21,43 +21,36 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 public class Swagger {
-		
+
 	@Bean
-    public Docket SwaggerAPI() {
+	public Docket SwaggerAPI() {
 		ParameterBuilder paramBuilder = new ParameterBuilder();
 		List<Parameter> params = new ArrayList<>();
-		paramBuilder.name("Authorization").modelRef(new ModelRef("string"))
-	.parameterType("header")
-		.required(false)
-		.build();
+		paramBuilder.name("Authorization").modelRef(new ModelRef("string")).parameterType("header").required(false)
+				.build();
 		params.add(paramBuilder.build());
- 
+
 		Docket docket = new Docket(DocumentationType.SWAGGER_2);
-		docket
-		.globalOperationParameters(params)
-		.select()
-		.apis(RequestHandlerSelectors.basePackage("br.com.gama.bankline.controller"))
-	.paths(PathSelectors.any())
-	.build()
-	.apiInfo(this.detalhesAPI().build())
-	.consumes(new HashSet<String>(Arrays.asList("application/json")))
-	.produces(new HashSet<String>(Arrays.asList("application/json")));
-		
+		docket.globalOperationParameters(params).select()
+				.apis(RequestHandlerSelectors.basePackage("br.com.gama.bankline.controller")).paths(PathSelectors.any())
+				.build().apiInfo(this.detalhesAPI().build())
+				.consumes(new HashSet<String>(Arrays.asList("application/json")))
+				.produces(new HashSet<String>(Arrays.asList("application/json")));
+
 		return docket;
-    }
+	}
 
 	private ApiInfoBuilder detalhesAPI() {
-		 
+
 		ApiInfoBuilder apiInfoBuilder = new ApiInfoBuilder();
- 
+
 		apiInfoBuilder.title("BankLine - API");
-	apiInfoBuilder.description("API Bankline");
-	apiInfoBuilder.version("0.0.1");
-	apiInfoBuilder.licenseUrl("https://github.com/renan2911/bankline");
-	apiInfoBuilder.license("Licença - SULTANS OF SPRING");
- 
+		apiInfoBuilder.description("API Bankline");
+		apiInfoBuilder.version("0.0.1");
+		apiInfoBuilder.licenseUrl("https://github.com/renan2911/bankline");
+		apiInfoBuilder.license("Licença - SULTANS OF SPRING");
+
 		return apiInfoBuilder;
- 
+
 	}
 }
-

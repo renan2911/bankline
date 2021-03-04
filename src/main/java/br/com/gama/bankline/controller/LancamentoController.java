@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.gama.bankline.DTO.ContaDTO;
 import br.com.gama.bankline.DTO.LancamentoDTO;
 import br.com.gama.bankline.DTO.LancamentoResponseDTO;
 import br.com.gama.bankline.service.LancamentoService;

@@ -17,13 +17,11 @@ import br.com.gama.bankline.DTO.NovaSenhaDTO;
 import br.com.gama.bankline.DTO.SenhaTemporariaDTO;
 import br.com.gama.bankline.DTO.SessaoDTO;
 import br.com.gama.bankline.exception.DataBaseException;
-import br.com.gama.bankline.exception.TokenExpiradoException;
 import br.com.gama.bankline.model.Conta;
 import br.com.gama.bankline.model.Usuario;
 import br.com.gama.bankline.repository.ContaRepository;
 import br.com.gama.bankline.repository.UsuarioRepository;
 import br.com.gama.bankline.security.JWTAuthorizationFilter;
-import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.AllArgsConstructor;
@@ -136,23 +134,5 @@ public class LoginService {
 
 		return token;
 	}
-
-	/*private boolean validarToken(String token) throws TokenExpiradoException {
-		Claims claims = jwtService.decodificarToken(token);
-		if (claims != null) {
-			String usuario = claims.getSubject();
-			Date dataFim = claims.getExpiration();
-			Date dataAtual = new Date(System.currentTimeMillis());
-
-			if (usuario != null && dataFim != null && dataAtual.before(dataFim)) {
-				return true;
-			} else {
-				throw new TokenExpiradoException("Não autorizado");
-			}
-		}
-
-		return false;
-
-	}*/
 
 }

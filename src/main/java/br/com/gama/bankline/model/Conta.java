@@ -9,7 +9,6 @@ import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import br.com.gama.bankline.enums.ContaTipo;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,23 +22,17 @@ public class Conta {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	@Column(nullable = false)
 	private Double saldo = 0.0;
-	
-	@Column(nullable = false,length = 20)
+
+	@Column(nullable = false, length = 20)
 	private String numero;
-	
-	//@Column(nullable = false)
-	//private ContaTipo contaTipo;
-	
+
 	@JsonIgnore
 	@OneToOne
 	private Usuario usuario;
-	
-	
-	
-	
+
 	public Conta(String numero, Usuario usuario) {
 		this.numero = numero;
 		this.usuario = usuario;
@@ -79,14 +72,14 @@ public class Conta {
 	}
 
 	public Double Depositar(Double valor) {
-		return this.saldo +=valor;
+		return this.saldo += valor;
 	}
-	
+
 	public boolean VerificarSaldo(Double valor) {
-		return this.saldo < valor ? false : true; 
+		return this.saldo < valor ? false : true;
 	}
-	
+
 	public void Sacar(Double valor) {
-		this.saldo -=valor;
+		this.saldo -= valor;
 	}
 }

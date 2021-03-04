@@ -2,9 +2,6 @@ package br.com.gama.bankline.DTO;
 
 import javax.validation.constraints.Size;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
 import br.com.gama.bankline.enums.TipoPlanoConta;
@@ -41,16 +38,5 @@ public class PlanoContaDTO {
 		this.login = usuario.getLogin();
 		this.tipoPlanoConta = planoConta.getTipoPlanoConta();
 	}
-	
-	
-	/*
-	public PlanoConta fromModel(PlanoContaInsertDTO usuarioDTO) {
-		return new PlanoConta(usuarioDTO.getDescricao(), usuarioDTO.getTipoPlanoConta());
-	}
-	
-	public static PlanoContaInsertDTO fromDTO(PlanoConta usuario) {
-		return new PlanoContaInsertDTO(usuario.getDescricao(), usuario.getTipoPlanoConta());
-	}
-	*/
 
 }
