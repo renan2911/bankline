@@ -13,11 +13,14 @@ import br.com.gama.bankline.model.Lancamento;
 
 @Repository
 public interface LancamentoRepository extends JpaRepository<Lancamento, Long> {
+	
 	@Query("Select L from Lancamento L where L.numConta = ?1 and L.data >= ?2 and L.data <= ?3")
 	@Transactional()
 	List<Lancamento> findByDatas(String numeroConta, LocalDate dataInicio, LocalDate dataFim);
 
 	@Transactional()
-	List<Lancamento> findByConta(String numeroConta);
+	List<Lancamento> findByConta(String numConta);
+	
+	List<Lancamento> findTop10ByContaIdOrderByDataDesc(Long contaId);
 
 }

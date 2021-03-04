@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Lancamento {
 	
@@ -38,6 +40,7 @@ public class Lancamento {
     @JoinColumn(name = "plano_conta", referencedColumnName = "id")
 	private PlanoConta planoConta;
 	
+	@JsonIgnore
 	@ManyToOne
 	private Conta conta;
 

@@ -1,6 +1,10 @@
 package br.com.gama.bankline.DTO;
 
-import java.util.ArrayList;
+import java.util.List;
+
+import javax.websocket.ContainerProvider;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.com.gama.bankline.model.Conta;
 import br.com.gama.bankline.model.Lancamento;
@@ -14,12 +18,15 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ContaDTO {
-
-	private ArrayList<Lancamento> lancamentos;
-	private Conta conta;
 	
-	public ContaDTO(Conta conta, ArrayList<Lancamento> lancamentos) {
-		this.conta = conta;
+	
+	private Long id;
+	private List<Lancamento> lancamentos;
+	private Double saldo;
+	
+	public ContaDTO(Conta conta, List<Lancamento> lancamentos) {
+		this.id = conta.getId();
+		this.saldo = conta.getSaldo();
 		this.lancamentos = lancamentos;
 	}
 }
