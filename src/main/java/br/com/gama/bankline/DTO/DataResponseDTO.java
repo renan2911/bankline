@@ -12,10 +12,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DataResponseDTO {
-
     private Boolean success;
     private Integer count;
     private List<PlanoContaDTO> data;
-
-    
 }
