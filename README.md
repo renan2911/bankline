@@ -40,3 +40,14 @@
             
 
 `-----------------------------------------------------------------`
+
+## Visão Geral
+API	                                      | Descrição                        |	Corpo da solicitação     |	Corpo da resposta                                       |
+:-------:                                 |:-------:                         |:-------:                  | :-------:                                                |
+POST /usuarios                            |	Salvar usuário                   |                           | Id do usuário cadastrado                                 |
+POST /login             	                | Autenticação no sistema          |      	                   | Informações da conta e usuário, com token de autenticaçao|
+POST /login/alterarSenha                  |	Alteração de senha	             |                           | Senha temporária                                         |
+POST /lancamentos                         |	Lançamento                       |                           | Informações referente ao lançamento                      |
+GET /planos-conta/{login}                 | Buscar todos os planos de contas |                           | Informações de todos os planos de conta                  |
+POST /planos-conta                        | Criar plano de conta             |                           | Nenhum                                                   |
+GET /dashboard/login/dataInicio/dataFim   | Extrato de todos os lançamentos  |                           | Extrato com todos os lançamentos de acordo com a data    |
