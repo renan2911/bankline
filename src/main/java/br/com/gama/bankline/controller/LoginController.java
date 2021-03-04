@@ -29,13 +29,13 @@ public class LoginController {
 	}
 	
 	@PostMapping("/alterarSenha")
-	public SessaoDTO alterarSenha(@Valid @RequestBody NovaSenhaDTO novaSenhaDTO){
+	public SessaoDTO alterarSenha(@RequestBody @Valid NovaSenhaDTO novaSenhaDTO){
 		return loginService.alterarSenha(novaSenhaDTO);
 
 	}
 	
 	@PostMapping("/solicitarSenha")
-	public MensagemResponseDTO solicitarSenha(@Valid @RequestBody SenhaTemporariaDTO senhaTemporariaDTO){
+	public MensagemResponseDTO solicitarSenha(@RequestBody @Valid SenhaTemporariaDTO senhaTemporariaDTO){
 		return loginService.solicitarSenhaTemporaria(senhaTemporariaDTO);
 
 	}

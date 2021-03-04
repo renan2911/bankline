@@ -2,8 +2,6 @@ package br.com.gama.bankline.DTO;
 
 import java.time.LocalDate;
 
-import javax.validation.constraints.NotNull;
-
 import br.com.gama.bankline.model.Lancamento;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,21 +14,16 @@ import lombok.Setter;
 @AllArgsConstructor
 public class LancamentoResponseDTO {
 	
-	@NotNull
 	private LocalDate data;
 	
-	@NotNull
 	private Double valor;
 	
 	private String descricao;
 	
-	@NotNull
 	private String numConta;
 	
-	@NotNull
 	private String numContaDest;
 	
-	@NotNull
 	private Long idPlanoConta;
 	
 	private Double saldoConta;

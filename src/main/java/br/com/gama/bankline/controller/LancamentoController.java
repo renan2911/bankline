@@ -1,5 +1,7 @@
 package br.com.gama.bankline.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +21,7 @@ public class LancamentoController {
 	private LancamentoService lancamentoService;
 	
 	@PostMapping
-	public ResponseEntity<LancamentoResponseDTO> realizarLancamento(@RequestBody LancamentoDTO lancamentoDTO) {
+	public ResponseEntity<LancamentoResponseDTO> realizarLancamento(@RequestBody @Valid LancamentoDTO lancamentoDTO) {
 		return new ResponseEntity<LancamentoResponseDTO>(lancamentoService.salvarLancamento(lancamentoDTO), HttpStatus.CREATED);
 	}
 }

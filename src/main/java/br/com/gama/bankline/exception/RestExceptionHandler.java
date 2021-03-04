@@ -47,12 +47,4 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 			return ResponseEntity.status(status).body(err);
 		}
 		
-		@ExceptionHandler(TokenExpiradoException.class)
-		public ResponseEntity<StandardError> tokenException(TokenExpiradoException ex, HttpServletRequest request) {
-
-			HttpStatus status = HttpStatus.NOT_FOUND;
-			StandardError err = new StandardError(Instant.now(), status.value(), ex.getMessage(), request.getRequestURI());
-
-			return ResponseEntity.status(status).body(err);
-		}
 }
