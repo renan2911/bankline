@@ -1,6 +1,6 @@
-# Grupo
+# BankLine
 
-### Equipe SULTANS OF SPRING :
+### Equipe SULTANS OF SPRING 🍀:
 - [Fernanda](https://github.com/)
 - [Luiz](https://github.com/)
 - [André](https://github.com/)
