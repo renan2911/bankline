@@ -14,6 +14,7 @@ import br.com.gama.bankline.DTO.NovaSenhaDTO;
 import br.com.gama.bankline.DTO.SenhaTemporariaDTO;
 import br.com.gama.bankline.DTO.SessaoDTO;
 import br.com.gama.bankline.service.LoginService;
+import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 
 @RestController
@@ -24,17 +25,20 @@ public class LoginController {
 	private LoginService loginService;
 
 	@PostMapping
+	@ApiOperation("Login")
 	public SessaoDTO logar(@RequestBody LoginDTO loginDTO) {
 		return loginService.autenticarUsuario(loginDTO);
 	}
 	
 	@PostMapping("/alterarSenha")
+	@ApiOperation("Alteração de senha")
 	public SessaoDTO alterarSenha(@RequestBody @Valid NovaSenhaDTO novaSenhaDTO){
 		return loginService.alterarSenha(novaSenhaDTO);
 
 	}
 	
 	@PostMapping("/solicitarSenha")
+	@ApiOperation("Senha temporária")
 	public MensagemResponseDTO solicitarSenha(@RequestBody @Valid SenhaTemporariaDTO senhaTemporariaDTO){
 		return loginService.solicitarSenhaTemporaria(senhaTemporariaDTO);
 

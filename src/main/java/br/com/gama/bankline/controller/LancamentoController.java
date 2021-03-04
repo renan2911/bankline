@@ -20,6 +20,7 @@ import br.com.gama.bankline.DTO.PlanoContaDTO;
 import br.com.gama.bankline.DTO.PlanoContaResponseDTO;
 import br.com.gama.bankline.service.LancamentoService;
 import br.com.gama.bankline.service.PlanoContaService;
+import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 
 @RestController
@@ -32,7 +33,7 @@ public class LancamentoController {
 
 	private PlanoContaService planoContaService;
 	
-	
+	@ApiOperation("Listar Planos de Conta")
 	@GetMapping("/planos-conta/{login}")
 	@ResponseStatus(HttpStatus.OK)
 	public DataResponseDTO lerPlanosConta(@PathVariable(value = "login") String login) {
@@ -41,12 +42,14 @@ public class LancamentoController {
 	
 
 	@PostMapping("/planos-conta")
+	@ApiOperation("Criação de Plano de Conta")
 	public ResponseEntity<PlanoContaResponseDTO> criarPlanosConta(@RequestBody @Valid PlanoContaDTO planoContaDTO) {
 		return new ResponseEntity<PlanoContaResponseDTO>(planoContaService.salvarPlanoConta(planoContaDTO),
 				HttpStatus.CREATED);
 	}
 
 	@PostMapping
+	@ApiOperation("Realizar lançamento")
 	public ResponseEntity<LancamentoResponseDTO> realizarLancamento(@RequestBody @Valid LancamentoDTO lancamentoDTO) {
 		return new ResponseEntity<LancamentoResponseDTO>(lancamentoService.salvarLancamento(lancamentoDTO),
 				HttpStatus.CREATED);

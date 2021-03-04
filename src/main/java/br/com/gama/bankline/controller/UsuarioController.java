@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.gama.bankline.DTO.MensagemResponseDTO;
 import br.com.gama.bankline.DTO.UsuarioDTO;
 import br.com.gama.bankline.service.UsuarioService;
+import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 
 @RestController
@@ -23,6 +24,7 @@ public class UsuarioController {
 	private UsuarioService usuarioService;
 	
 	@PostMapping
+	@ApiOperation("Criação do Usuário")
 	public ResponseEntity<MensagemResponseDTO> criarConta(@RequestBody @Valid UsuarioDTO usuarioDTO) {
 		return new ResponseEntity<MensagemResponseDTO>(usuarioService.salvarUsuario(usuarioDTO), HttpStatus.CREATED);
 	}
