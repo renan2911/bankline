@@ -21,6 +21,8 @@ public interface LancamentoRepository extends JpaRepository<Lancamento, Long> {
 	@Transactional()
 	List<Lancamento> findByConta(String numConta);
 	
-	List<Lancamento> findTop10ByContaIdOrderByDataDesc(Long contaId);
+	List<Lancamento> findByContaIdOrderByDataDesc(Long contaId);
+	
+	List<Lancamento> findByDataGreaterThanEqualAndDataLessThanEqualAndNumContaOrderByDataDesc(LocalDate data, LocalDate data1, String numConta);
 
 }
