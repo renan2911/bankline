@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.com.gama.bankline.enums.TipoPlanoConta;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,6 +28,7 @@ public class PlanoConta {
 	@Column(nullable = false)
 	private TipoPlanoConta tipoPlanoConta;
 	
+	@JsonIgnore
 	@ManyToOne
 	private Usuario usuario;
 	

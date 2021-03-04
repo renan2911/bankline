@@ -33,7 +33,7 @@ public class LancamentoController {
 	private PlanoContaService planoContaService;
 	
 	
-	@GetMapping("/{login}")
+	@GetMapping("/planos-conta/{login}")
 	@ResponseStatus(HttpStatus.OK)
 	public DataResponseDTO lerPlanosConta(@PathVariable(value = "login") String login) {
 		return planoContaService.lerPlanoConta(login);
