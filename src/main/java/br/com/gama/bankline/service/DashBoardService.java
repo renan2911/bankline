@@ -61,14 +61,14 @@ public DashBoardDTO listarDashBoardporData(String login, String dataInicioStr, S
 	
 	try
 	{
-		dataInicio = LocalDate.parse(dataInicioStr);
+		dataInicio = LocalDate.parse(dataInicioStr.replaceAll("\s+",""));
 	}catch (Exception e) {
 		throw new DataBaseException("data inicial invalida");
 	}
 	
 	try
 	{
-		dataFim = LocalDate.parse(dataFimStr);
+		dataFim = LocalDate.parse(dataFimStr.replaceAll("\s+",""));
 	}catch (Exception e) {
 		throw new DataBaseException("data final inválida.");
 	}
