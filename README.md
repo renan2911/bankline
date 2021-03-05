@@ -1,9 +1,9 @@
 # BankLine
 
 ### Equipe SULTANS OF SPRING 🍀:
-- [Fernanda](https://github.com/)
-- [Luiz](https://github.com/)
-- [André](https://github.com/)
+- [Fernanda](https://github.com/fernandavianadss)
+- [Luiz](https://github.com/LgMotta)
+- [André](https://github.com/andre-prado)
 - [Renan](https://github.com/renan2911)
   
 
