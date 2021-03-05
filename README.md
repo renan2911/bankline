@@ -26,10 +26,10 @@
 - Utilizamos o banco de dados **MySQL**, que foi hospedado no herokuapp.
 
 ### Swagger
-[Swagger doc](https://)
+[Swagger doc](https://bankline-api-sultans-of-spring.herokuapp.com/swagger-ui.html)
 
 ### Base API URL - Heroku
-[URL](https://)
+[URL](bankline-api-sultans-of-spring.herokuapp.com/)
 
 ### Team :handshake:
 - A escolha do time foi feita por sorteio.
